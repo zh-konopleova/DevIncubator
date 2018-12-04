@@ -51,11 +51,20 @@ function clickLoadMore(event) {
 function openCardCharacter(event) {
   event.preventDefault();
   
-  
   var url = $(this).attr('data-href');
-  $.ajax({
-    url: url
-  }).done(renderCharacter);
+  
+  var data = localStorage.getItem(url);
+  if (data) {
+    data = JSON.parse(data);
+    renderCharacter(data);
+  } else {
+    $.ajax({
+      url: url
+    }).done(function (data) {
+      localStorage.setItem(url, JSON.stringify(data));
+      renderCharacter(data);
+    });
+  }
 };
 
 function renderCharacter (data) {
