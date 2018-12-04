@@ -18,14 +18,23 @@ body {
 .grid {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   margin: 0 -20px;
 }
 
 .grid__col {
   position: relative;
   box-sizing: border-box;
-  width: 50%;  
+  width: 100%;  
   padding: 20px;
+}
+
+.grid__col:nth-child(1) {
+  order: 2;
+}
+
+.grid__col:nth-child(2) {
+  order: 1;
 }
 
 .characters__list {
@@ -122,4 +131,18 @@ body {
 
 .hidden {
   display: none;
+}
+
+@media (min-width: 768px) {
+  .grid__col {
+    width: 50%;
+  }
+  
+  .grid__col:nth-child(1) {
+    order: 1;
+  }
+  
+  .grid__col:nth-child(2) {
+    order: 2;
+  }
 }
