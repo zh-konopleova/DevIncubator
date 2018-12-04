@@ -1,7 +1,16 @@
 function loadCharacter (url) {
-  $.ajax({
-    url: url
-  }).done(renderData);
+  var data = localStorage.getItem(url);
+  if (data) {
+    data = JSON.parse(data);
+    renderData(data);
+  } else {
+    $.ajax({
+      url: url
+    }).done(function (data) {
+      localStorage.setItem(url, JSON.stringify(data));
+      renderData(data);
+    });
+  }
 }
 
 function renderData(data) {
@@ -41,6 +50,7 @@ function clickLoadMore(event) {
 
 function openCardCharacter(event) {
   event.preventDefault();
+  
   
   var url = $(this).attr('data-href');
   $.ajax({
