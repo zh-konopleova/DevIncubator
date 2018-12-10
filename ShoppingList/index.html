@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Shopping List</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  
+  <body>
+    <div class="container">
+      
+      <h1>Список покупок</h1>
+      
+      <form class="" action="index.html" method="post">
+        <div class="form-row align-items-center">
+          <div class="col">
+            <input type="text" class="form-control mb-2" 
+              id="inlineFormInput" placeholder="Наименование">
+          </div>
+          <div class="col">
+            <input type="text" class="form-control mb-2" 
+              id="inlineFormInput" placeholder="Количество/масса">
+          </div>
+          <div class="col">
+            <select class="form-control mb-2">
+              <option>Евроопт</option>
+              <option>Рублёвский</option>
+              <option>Первомайский</option>
+              <option>Гиппо</option>
+            </select>
+          </div>
+          <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-2">
+              Добавить
+            </button>
+          </div>
+        </div>
+      </form>
+      
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">№</th>
+              <th scope="col">Наименование</th>
+              <th scope="col">Количество/масса</th>
+              <th scope="col">Магазин</th>
+              <th scope="col">Выполнено</th>
+              <th scope="col">Удалить</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Мясо</td>
+              <td>1 кг</td>
+              <td>Рублёвский</td>
+              <td>
+                <input type="checkbox" unchecked>
+              </td>
+              <td>
+                <button type="button" class="btn btn-danger">
+                  <i class="far fa-trash-alt"></i>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">1</th>
+              <td>Мясо</td>
+              <td>1 кг</td>
+              <td>Рублёвский</td>
+              <td>
+                <input type="checkbox" unchecked>
+              </td>
+              <td>
+                <button type="button" class="btn btn-danger">
+                  <i class="far fa-trash-alt"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+  
+  <!-- <div id="myDIV" class="header">
+  <h2>My To Do List</h2>
+  <input type="text" id="myInput" placeholder="Title...">
+  <span onclick="newElement()" class="addBtn">Add</span>
+</div>
+
+<ul id="myUL">
+  <li>Hit the gym</li>
+  <li class="checked">Pay bills</li>
+  <li>Meet George</li>
+  <li>Buy eggs</li>
+  <li>Read a book</li>
+  <li>Organize office</li>
+</ul> -->
