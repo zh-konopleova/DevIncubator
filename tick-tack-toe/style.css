@@ -1,0 +1,51 @@
+.field__wrapper {
+  margin-top: 15px;
+  display: grid;
+  grid-template-columns: 150px 150px 150px;
+  grid-template-rows: 150px 150px 150px;
+  grid-gap: 10px;
+  justify-content: center;
+}
+
+.field__item {
+  font-size: 120px;
+  line-height: 130px;
+  text-align: center;
+  color: white;
+  background-color: black;
+}
+
+.headline {
+  text-align: center;
+}
+
+.score {
+  display: grid;
+  grid-template-columns: 100px 100px;
+  grid-auto-rows: 50px 50px;
+  grid-column-gap: 20px;
+  grid-row-gap: 5px;
+  justify-content: center;
+}
+
+.score__item {
+  font-size: 20px;
+  text-align: center;
+}
+
+.score__result {
+  font-weight: 700;
+}
+
+.current-player {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.current-player__h {
+  font-size: 20px;
+}
+
+.current-player__number {
+  font-weight: 700;
+}
