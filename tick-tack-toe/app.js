@@ -7,13 +7,38 @@ let cells = document.querySelectorAll(".field__item");
 let xPoints = 0;
 let oPoints = 0;
 
+function clearGameField() {
+  cells.forEach(function (cell) {
+    cell.innerText = '';
+  });
+
+  gameField = [
+    undefined, undefined, undefined,
+    undefined, undefined, undefined,
+    undefined, undefined, undefined
+  ];
+}
+
+let restartButton = document.querySelector('.btn--restart');
+restartButton.addEventListener("click", function(event) {
+  event.preventDefault();
+
+  xPoints = 0;
+  oPoints = 0;
+
+  document.querySelector('.score__result--o').innerText = oPoints;
+  document.querySelector('.score__result--x').innerText = xPoints;
+});
+
 clearGameField();
 
 cells.forEach(function(cell) {
   cell.addEventListener("click", function(event) {
     event.preventDefault();
     let index = +this.getAttribute("data-id");
-
+    if (gameField[index - 1] !== undefined) {
+      return;
+    }
     if (currentPlayer === 1) {
       this.innerText = 'X';
       gameField[index - 1] = 'X';
@@ -22,9 +47,9 @@ cells.forEach(function(cell) {
       if (checkWinner('X')) {
         xPoints++;
         document.querySelector('.score__result--x').innerText = xPoints;
-        document.querySelector('.modal-title').innerText = 'Крестики победили! Продолжить?';
         clearGameField();
-        $('#exampleModalCenter').modal('show');
+        document.querySelector('.modal-title').innerText = 'Крестики победили! Продолжить?';
+        $('#modalCenter').modal('show');
       }
     } else {
       this.innerText = 'O';
@@ -34,32 +59,24 @@ cells.forEach(function(cell) {
       if (checkWinner('O')) {
         oPoints++;
         document.querySelector('.score__result--o').innerText = oPoints;
-        document.querySelector('.modal-title').innerText = 'Нолики победили! Продолжить?';
         clearGameField();
-        $('#exampleModalCenter').modal('show');
+        document.querySelector('.modal-title').innerText = 'Нолики победили! Продолжить?';
+        $('#modalCenter').modal('show');
       }
+    }
+    let draw = true;
+    for (let i = 0; i < gameField.length; i++) {
+      if (gameField[i] === undefined) {
+        draw = false;
+      }
+    };
+    if (draw) {
+      clearGameField();
+      document.querySelector('.modal-title').innerText = 'Ничья! Продолжить?';
+      $('#modalCenter').modal('show');
     }
   });
 });
-
-function clearGameField() {
-  cells.forEach(function (cell) {
-    cell.innerText = '';
-  });
-
-function clearPoints() {
-  if () {
-    xPoints = 0;
-    oPoints = 0;
-  }
-}
-
-  gameField = [
-    undefined, undefined, undefined,
-    undefined, undefined, undefined,
-    undefined, undefined, undefined
-  ];
-}
 
 function checkWinner(player) {
   if (gameField[0] == player && gameField[1] == player && gameField[2] == player ||
