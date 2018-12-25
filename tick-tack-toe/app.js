@@ -78,6 +78,20 @@ cells.forEach(function(cell) {
   });
 });
 
+let randomMoveButton = document.querySelector('.btn--random');
+randomMoveButton.addEventListener('click', function(event) {
+  event.preventDefault();
+  let randomFieldPosition = [];
+  for (let i = 0; i < gameField.length; i++) {
+    if (gameField[i] === undefined) {
+      randomFieldPosition.push(i);
+    }
+  }
+  let item = randomFieldPosition[Math.floor(Math.random()*randomFieldPosition.length)];
+  gameField[item] = 'X';
+  cells[item].innerText = 'X';
+})
+
 function checkWinner(player) {
   if (gameField[0] == player && gameField[1] == player && gameField[2] == player ||
       gameField[3] == player && gameField[4] == player && gameField[5] == player ||
