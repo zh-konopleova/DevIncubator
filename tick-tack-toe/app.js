@@ -91,7 +91,7 @@ function round(cell) {
   playerMove(cell, currentPlayer);
   if (checkWinner(currentPlayer)) {
     changeScore();
-    clearGameField();
+    setTimeout(clearGameField, 1000);
     openDialogue(currentPlayer + ' победили! Продолжить?');
   }
   switchPlayer(nextPlayer());
