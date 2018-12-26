@@ -1,6 +1,6 @@
 "use strict";
 
-let currentPlayer = 1;
+let currentPlayer = 'X';
 let gameField = [];
 let cells = document.querySelectorAll(".field__item");
 
@@ -35,48 +35,72 @@ clearGameField();
 cells.forEach(function(cell) {
   cell.addEventListener("click", function(event) {
     event.preventDefault();
-    let index = +this.getAttribute("data-id");
-    if (gameField[index - 1] !== undefined) {
-      return;
-    }
-    if (currentPlayer === 1) {
-      this.innerText = 'X';
-      gameField[index - 1] = 'X';
-      currentPlayer = 2;
-      document.querySelector('.current-player__number').innerText = 'O';
-      if (checkWinner('X')) {
-        xPoints++;
-        document.querySelector('.score__result--x').innerText = xPoints;
-        clearGameField();
-        document.querySelector('.modal-title').innerText = 'Крестики победили! Продолжить?';
-        $('#modalCenter').modal('show');
-      }
-    } else {
-      this.innerText = 'O';
-      gameField[index - 1] = 'O';
-      currentPlayer = 1;
-      document.querySelector('.current-player__number').innerText = 'X';
-      if (checkWinner('O')) {
-        oPoints++;
-        document.querySelector('.score__result--o').innerText = oPoints;
-        clearGameField();
-        document.querySelector('.modal-title').innerText = 'Нолики победили! Продолжить?';
-        $('#modalCenter').modal('show');
-      }
-    }
-    let draw = true;
-    for (let i = 0; i < gameField.length; i++) {
-      if (gameField[i] === undefined) {
-        draw = false;
-      }
-    };
-    if (draw) {
-      clearGameField();
-      document.querySelector('.modal-title').innerText = 'Ничья! Продолжить?';
-      $('#modalCenter').modal('show');
-    }
+
+    if (cellIsNotEmpty(this)) return;
+    round(this);
   });
 });
+
+function cellIsNotEmpty(cell) {
+  let index = +cell.getAttribute("data-id");
+  return gameField[index - 1] !== undefined;
+};
+
+function playerMove(cell, player) {
+  let index = +cell.getAttribute("data-id");
+  cell.innerText = player;
+  gameField[index - 1] = player;
+};
+
+function switchPlayer(player) {
+  currentPlayer = player;
+  document.querySelector('.current-player__number').innerText = player;
+};
+
+function nextPlayer() {
+  return currentPlayer === 'X' ? 'O' : 'X';
+};
+
+function changeScore() {
+  if (currentPlayer === 'X') {
+    xPoints++;
+    document.querySelector('.score__result--x').innerText = xPoints;
+  } else {
+    oPoints++;
+    document.querySelector('.score__result--o').innerText = oPoints;
+  }
+};
+
+function isDraw() {
+  let draw = true;
+  for (let i = 0; i < gameField.length; i++) {
+    if (gameField[i] === undefined) {
+      draw = false;
+    }
+  }
+  return draw;
+};
+
+
+function openDialogue(text) {
+  document.querySelector('.modal-title').innerText = text;
+  $('#modalCenter').modal('show');
+};
+
+function round(cell) {
+  playerMove(cell, currentPlayer);
+  if (checkWinner(currentPlayer)) {
+    changeScore();
+    clearGameField();
+    openDialogue(currentPlayer + ' победили! Продолжить?');
+  }
+  switchPlayer(nextPlayer());
+
+  if (isDraw()) {
+    clearGameField();
+    openDialogue('Ничья! Продолжить?');
+  }
+};
 
 let randomMoveButton = document.querySelector('.btn--random');
 randomMoveButton.addEventListener('click', function(event) {
@@ -87,10 +111,10 @@ randomMoveButton.addEventListener('click', function(event) {
       randomFieldPosition.push(i);
     }
   }
+
   let item = randomFieldPosition[Math.floor(Math.random()*randomFieldPosition.length)];
-  gameField[item] = 'X';
-  cells[item].innerText = 'X';
-})
+  round(cells[item]);
+});
 
 function checkWinner(player) {
   if (gameField[0] == player && gameField[1] == player && gameField[2] == player ||
