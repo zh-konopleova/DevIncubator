@@ -38,7 +38,7 @@ function getBaloonContentBody(temp, icon) {
 
 function requestWeatherAPI(lat, lon) {
   let xhr = new XMLHttpRequest();
-  let url = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${WEATHER_API_KEY}&units=metric&lang=ru`;
+  let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${WEATHER_API_KEY}&units=metric&lang=ru`;
 
   xhr.open('GET', url, false);
   xhr.send();
