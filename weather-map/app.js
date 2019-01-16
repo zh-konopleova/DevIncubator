@@ -40,7 +40,7 @@ function requestWeatherAPI(lat, lon) {
   let xhr = new XMLHttpRequest();
   let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${WEATHER_API_KEY}&units=metric&lang=ru`;
 
-  xhr.open('GET', url, false);
+  xhr.open('GET', url, true);
   xhr.send();
 
   if (xhr.status != 200) {
